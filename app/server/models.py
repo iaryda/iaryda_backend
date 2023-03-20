@@ -5,10 +5,6 @@ class Diary(BaseModel):
     content: str
     feeling: str
         
-def diary_helper(diary) -> dict:
-    diary.pop("_id")
-    return diary
-
 def responseModel(message,data) -> dict:
     return {
         "status" : 200,
