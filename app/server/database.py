@@ -14,4 +14,6 @@ def diary_helper(diary) -> dict:
     diary.pop("_id")
     return diary
 
+#db 조회, 관리 함수 만들어야함
+
 

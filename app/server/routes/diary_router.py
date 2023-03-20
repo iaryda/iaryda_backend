@@ -14,9 +14,10 @@ async def get_all_diaries():
         
     return responseModel(response_message, result_data)
 
-@router.post("/", response_description="create a new diary")
+@router.post("/", response_description="create a diary")
 async def create_diary(diary: Diary):
-    response_message = "create diary"
+    response_message = "create a diary"
     diary = await diary_collection.insert_one({"date" : diary.date, "content" : diary.content, "feeling": diary.feeling})
     result_data = diary_helper(await diary_collection.find_one({"_id" : diary.inserted_id}))
     return responseModel(response_message, result_data)
+

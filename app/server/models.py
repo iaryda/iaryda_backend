@@ -18,3 +18,5 @@ def ErrorResponseModel(error_code,message) -> dict:
         "message" : message,
         "data" : []
     }
+
+#Exception class 필요함
