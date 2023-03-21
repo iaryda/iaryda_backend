@@ -5,6 +5,10 @@ class Diary(BaseModel):
     content: str
     feeling: str
         
+class UpdateDiary(BaseModel):
+    content: str
+    feeling: str
+        
 def responseModel(message, data) -> dict:
     if type(data) == list:
         return {

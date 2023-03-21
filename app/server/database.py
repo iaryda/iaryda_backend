@@ -16,12 +16,31 @@ def diary_helper(diary) -> dict:
     return diary
 
 #db 조회, 관리 함수 만들어야함
-# async def find_diary(date: str) -> dict:
-#     diary = await diary_collection.find_one({"date" : date})
-#     return diary_helper(diary)
+async def get_diaries() -> list:
+    result_data = []
+    
+    async for diary in diary_collection.find():
+        result_data.append(diary_helper(diary))
+        
+    return result_data
 
-# async def create_diary(diary_data: dict) -> dict:
-#     diary = await diary_collection.insert_one(diary_data)
-#     result = diary_helper(await diary_collection.find_one({"_id" : diary.inserted_id}))
-#     return result
+
+async def get_diary(date: str) -> dict:
+    diary = await diary_collection.find_one({"date" : date})
+    return diary_helper(diary)
+
+
+async def create_diary(diary_data: dict) -> dict:
+    diary = await diary_collection.insert_one(diary_data)
+    result = await get_diary(date)
+    return result
+
+async def update_diary(date:str , diary_data: dict) -> dict:
+    diary = await diary_collection.update_one({"date" : date}, {"$set" : diary_data})
+    result = await get_diary(date)
+    return result
+
+async def delete_diary(date:str):
+    await diary_collection.delete_one({"date" : date})
+    return True
 
