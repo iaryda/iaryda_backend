@@ -38,3 +38,19 @@ async def delete_a_diary(date: str):
     else:
         return responseModel(response_message,["ERROR"])
     
+# @router.get("/", response_description="test")
+# async def diary_test():
+#     print(type(diary_collection.find()))  #
+#     print(type(await diary_collection.find_one({"date" : "2023-03-01"})))
+#     print(type(await diary_collection.insert_one({"date": "2024-05-21","content": "test data", "feeling": "good"})))
+#     print(type(await diary_collection.update_one({"date": "2024-05-21"},{"$set" : {"conetne" : "test"}})))
+#     print(type(await diary_collection.delete_one({"date": "2024-05-21"})))
+#     return {"test" : "test"}
+
+'''
+<class 'motor.motor_asyncio.AsyncIOMotorCursor'>
+<class 'dict'>
+<class 'pymongo.results.InsertOneResult'>
+<class 'pymongo.results.UpdateResult'>
+<class 'pymongo.results.DeleteResult'>
+'''

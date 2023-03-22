@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Union
 
 class Diary(BaseModel):
     date: str
@@ -8,6 +9,10 @@ class Diary(BaseModel):
 class UpdateDiary(BaseModel):
     content: str
     feeling: str
+        
+class SearchModel(BaseModel):
+    content: Union[str, None]
+    feeling: Union[str, None]
         
 def responseModel(message, data) -> dict:
     if type(data) == list:

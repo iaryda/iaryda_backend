@@ -44,3 +44,9 @@ async def delete_diary(date:str):
     await diary_collection.delete_one({"date" : date})
     return True
 
+async def search_diary(query):
+    result_data = []
+        
+    async for diary in diary_collection.find(query):
+        result_data.append(diary_helper(diary))
+    return result_data
