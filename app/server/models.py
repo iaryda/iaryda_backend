@@ -27,14 +27,3 @@ def responseModel(message, data) -> dict:
             "message" : message,
             "data" : [data]
         }
-
-
-#굳이 필요할까?
-def ErrorResponseModel(error_code,message) -> dict:
-    return {
-        "status" : error_code,
-        "message" : message,
-        "data" : []
-    }
-
-#Exception class 필요함
