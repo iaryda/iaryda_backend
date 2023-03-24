@@ -1,17 +1,17 @@
 from fastapi import APIRouter
 from fastapi.encoders import jsonable_encoder
-from app.server.database import diary_collection, diary_helper, get_diaries,create_diary,get_diary,update_diary,delete_diary
+from app.server.database import diary_collection, diary_helper, get_diaries,create_diary,get_diary,update_diary,delete_diary,get_feelings
 from app.server.models import responseModel,Diary,UpdateDiary
 
 router = APIRouter(prefix = "/diaries")
 
-@router.get("/",response_description="get all diaries")
+@router.get("",response_description="get all diaries")
 async def get_all_diaries():
     response_message = "all diaries"
     diaries = await get_diaries()
     return responseModel(response_message, diaries)
 
-@router.post("/", response_description="create a diary")
+@router.post("", response_description="create a diary")
 async def create_new_diary(diary: Diary):
     response_message = "create a diary"
     diary = await create_diary(jsonable_encoder(diary))
@@ -37,6 +37,12 @@ async def delete_a_diary(date: str):
         return responseModel(response_message,result_data)
     else:
         return responseModel(response_message,["ERROR"])
+    
+@router.get("/feelings/{month}")
+async def get_month_feelings(month: str):
+    response_message = "get all feelings of month"
+    feelings = await get_feelings(month)
+    return responseModel(response_message, feelings)
     
 # @router.get("/", response_description="test")
 # async def diary_test():

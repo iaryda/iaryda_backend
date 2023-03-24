@@ -24,6 +24,3 @@ async def search(content: Union[None,str] = None, feeling: Union[None,str] = Non
         diaries = await search_diary(query)
         return responseModel("success",diaries)
     
-@router.post("")
-async def search():
-    raise TestException()

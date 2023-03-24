@@ -15,6 +15,11 @@ def diary_helper(diary) -> dict:
     diary.pop("_id")
     return diary
 
+def feeling_helper(diary) -> dict:
+    diary.pop("_id")
+    diary.pop("content")
+    return diary
+
 #db 조회, 관리 함수 만들어야함
 async def get_diaries() -> list:
     result_data = []
@@ -32,7 +37,7 @@ async def get_diary(date: str) -> dict:
 
 async def create_diary(diary_data: dict) -> dict:
     diary = await diary_collection.insert_one(diary_data)
-    result = await get_diary(date)
+    result = await get_diary(diary_data['date'])
     return result
 
 async def update_diary(date:str , diary_data: dict) -> dict:
@@ -49,4 +54,11 @@ async def search_diary(query):
         
     async for diary in diary_collection.find(query):
         result_data.append(diary_helper(diary))
+    return result_data
+
+async def get_feelings(month: str):
+    result_data = []
+    
+    async for diary in diary_collection.find({"date" : {"$regex": month}}):
+        result_data.append(feeling_helper(diary))
     return result_data
