@@ -3,6 +3,7 @@ from fastapi.encoders import jsonable_encoder
 # from app.server.database import diary_collection, diary_helper, get_diaries,create_diary,get_diary,update_diary,delete_diary,get_feelings
 from app.server import database
 from app.server.models import responseModel,Diary,UpdateDiary
+from app.server.exceptions import *
 
 router = APIRouter(prefix = "/diaries")
 
@@ -33,11 +34,8 @@ async def update_a_diary(date: str, diary: UpdateDiary):
 @router.delete("/{date}", response_description="read a diary")
 async def delete_a_diary(date: str):
     response_message = "succesfully delete diary"
-    if await database.delete_diary(date):
-        result_data = []
-        return responseModel(response_message,result_data)
-    else:
-        return responseModel(response_message,["ERROR"])
+    result_data = await database.delete_diary(date)
+    return responseModel(response_message,result_data)
     
 @router.get("/feelings/{month}")
 async def get_month_feelings(month: str):

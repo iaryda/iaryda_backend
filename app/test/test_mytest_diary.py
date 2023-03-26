@@ -1,29 +1,41 @@
 # import pytest
-# # import mongomock
-# from unittest.mock import patch
+# import mongomock
+# # from unittest.mock import patch
 # from app.server.app import app
-# from app.server.database import db,diary_collection
+# from app.server.database import get_db
 # from fastapi.testclient import TestClient
+# import asyncio
+
+# @pytest.yield_fixture
+# def event_loop():
+#     """Create an instance of the default event loop for each test case."""
+#     policy = asyncio.WindowsSelectorEventLoopPolicy()
+#     res = policy.new_event_loop()
+#     asyncio.set_event_loop(res)
+#     res._close = res.close
+#     res.close = lambda: None
+
+#     yield res
+
+#     res._close()
 
 # client = TestClient(app)
     
-# @pytest.fixture(scope="function")
-# def mongo_mock():
-#     fake_collection = db.get_collection("fake_diary")
-#     with patch("app.server.database.diary_collection") as mock:
-#         mock.return_value = fake_collection
+# @pytest.fixture(scope="module")
+# def test_db():
+#     app.dependency_overrides[get_db] = lambda: mongomock.MondoClient().db
+#     client = TestClient(app)
+#     yield client
     
-#     yield
-#     db.drop_collection("fake_diary")
-    
-# def test_mytest(mongo_mock):
+# def test_mytest(test_db):
 #     response = client.get("/diaries")
 #     assert response.status_code == 200
+#     # assert response.json()["data"] == [] 
     
-# def test_post_test(mongo_mock):
+# def test_post_test(test_db,event_loop):
 #         # 새로운 항목 생성을 위한 데이터
 #     data = {
-#         "date" : "2023-03-12",
+#         "date" : "2023-03-13",
 #         "content" : "test",
 #         "feeling" : "good"
 #     }
