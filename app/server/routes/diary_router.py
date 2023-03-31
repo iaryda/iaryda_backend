@@ -25,13 +25,13 @@ async def get_a_diary(date: str):
     diary = await database.get_diary(date)
     return responseModel(response_message,diary)
 
-@router.put("/{date}", response_description="read a diary")
+@router.put("/{date}", response_description="update a diary")
 async def update_a_diary(date: str, diary: UpdateDiary):
     response_message = "update a diary"
     new_diary = await database.update_diary(date,jsonable_encoder(diary))
     return responseModel(response_message,diary)
     
-@router.delete("/{date}", response_description="read a diary")
+@router.delete("/{date}", response_description="delete a diary")
 async def delete_a_diary(date: str):
     response_message = "succesfully delete diary"
     result_data = await database.delete_diary(date)

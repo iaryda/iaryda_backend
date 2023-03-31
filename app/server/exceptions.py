@@ -26,7 +26,7 @@ class NoQueryException(APIException):
 class DiaryDoseNotExistExecption(APIException):
     def __init__(self,):
         self.status_code = StatusCode.HTTP_500
-        self.content = make_error_content("There is no diary in this date")
+        self.content = make_error_content("Unvalid date. There is no diary in this date")
         
 class DiaryAlreadyExistException(APIException):
     def __init__(self):

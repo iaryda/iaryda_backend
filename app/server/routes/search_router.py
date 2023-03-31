@@ -22,5 +22,6 @@ async def search(content: Union[None,str] = None, feeling: Union[None,str] = Non
     else:
         query = make_query(content,feeling)
         diaries = await search_diary(query)
-        return responseModel("success",diaries)
+        response_message = "success"
+        return responseModel(response_message,diaries)
     
