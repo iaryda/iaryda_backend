@@ -1,17 +1,21 @@
 from motor import motor_asyncio
 from .models import Diary
 from app.server.exceptions import *
-
+from app.appConfig import get_db,get_diary_collection
 host = 'localhost'
 port = 27017
 
 #database settings
-def get_db():
-    client = motor_asyncio.AsyncIOMotorClient(host,port)
-    db = client.iaryda
-    return db
+# def get_db():
+#     client = motor_asyncio.AsyncIOMotorClient(host,port)
+#     db = client.iaryda
+#     return db
 
-diary_collection = get_db().get_collection("diary")
+# diary_collection = get_db().get_collection("diary")
+
+
+
+diary_collection = get_diary_collection()
 
 #helpers
 def diary_helper(diary) -> dict:
