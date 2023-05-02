@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from app.server.models import SearchModel,responseModel
-from app.server.database import search_diary
+from app.server.database import database
 from typing import Union
 from app.server.exceptions import APIException,TestException,NoQueryException
 
@@ -21,7 +21,7 @@ async def search(content: Union[None,str] = None, feeling: Union[None,str] = Non
         raise NoQueryException()
     else:
         query = make_query(content,feeling)
-        diaries = await search_diary(query)
+        diaries = await database.search_diary(query)
         response_message = "success"
         return responseModel(response_message,diaries)
     

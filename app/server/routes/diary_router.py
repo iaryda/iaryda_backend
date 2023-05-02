@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi.encoders import jsonable_encoder
 # from app.server.database import diary_collection, diary_helper, get_diaries,create_diary,get_diary,update_diary,delete_diary,get_feelings
-from app.server import database
+from app.server.database import database
 from app.server.models import responseModel,Diary,UpdateDiary
 from app.server.exceptions import *
 

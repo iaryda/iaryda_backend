@@ -13,3 +13,5 @@ async def api_exception_handler(request: Request, exc: APIException):
         status_code =  exc.status_code,
         content = exc.content
     )
+
+
