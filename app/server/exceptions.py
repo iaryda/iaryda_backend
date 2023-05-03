@@ -13,10 +13,6 @@ class APIException(Exception):
     status_code : int
     content: dict
         
-class TestException(APIException):
-    def __init__(self,):
-        self.status_code = StatusCode.HTTP_500
-        self.content = make_error_content(StatusCode.HTTP_500,"Unallowed Http Method")
 
 class NoQueryException(APIException):
     def __init__(self,):

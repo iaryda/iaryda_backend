@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from app.server.models import SearchModel,responseModel
 from app.server.database import database
 from typing import Union
-from app.server.exceptions import APIException,TestException,NoQueryException
+from app.server.exceptions import *
 
 router = APIRouter(prefix = "/search")
 

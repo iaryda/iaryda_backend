@@ -1,11 +1,7 @@
 from motor import motor_asyncio
 from .models import Diary
 from app.server.exceptions import *
-from app.appConfig import config
 
-
-host = 'localhost'
-port = 27017
 
 #helpers
 def diary_helper(diary) -> dict:
@@ -25,9 +21,12 @@ def check_feeling_validation(diary):
 
 
 class Database():
+    host = 'localhost'
+    port = 27017
+    
     def __init__(self):
         self.config = "diary"
-        self.client = motor_asyncio.AsyncIOMotorClient(host,port)
+        self.client = motor_asyncio.AsyncIOMotorClient(Database.host,Database.port)
         self.db = self.client.iaryda
         self.diary_collection = self.db.get_collection(self.config)
         
